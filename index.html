@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario septiembre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calendar-container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7 columnas para representar una semana */
+            grid-gap: 10px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px; /* Ajusta el tamaño máximo del calendario */
+            margin: 0 auto;
+        }
+
+        .calendar-header {
+            display: contents;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .day-of-week {
+            text-align: center;
+            padding: 10px;
+            border-radius: 10%;
+            background-color: #2272e9;
+        }
+
+        .day {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .day.has-note {
+            background-color: #ffc107; /* Cambia de color si tiene una nota */
+        }
+
+        .day.current-day {
+            border: 2px solid #007bff; /* Resalta el día actual */
+            background-color: #0056b3;
+        }
+
+        .day:hover {
+            background-color: #218838;
+            cursor: pointer;
+        }
+
+        .modal, .modal-note {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content, .note-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content input, .modal-content textarea, .note-content ul {
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .modal-content textarea {
+            height: 100px;
+        }
+
+        .note-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .note-content ul li {
+            background-color: #f8f9fa;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .note-content ul li span {
+            display: block;
+        }
+
+        .note-content ul li button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .note-content ul li button:hover {
+            background-color: #c82333;
+        }
+
+        .modal-content button, .note-content button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .modal-content button:hover, .note-content button:hover {
+            background-color: #218838;
+        }
+
+        .note-content h2 {
+            margin-bottom: 15px;
+        }
+
+        .close-btn {
+            background-color: #6c757d;
+            margin-left: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <h1>SEPTIEMBRE</h1>
+        <div class="calendar">
+            <div class="calendar-header">
+                <div class="day-of-week">Dom</div>
+                <div class="day-of-week">Lun</div>
+                <div class="day-of-week">Mar</div>
+                <div class="day-of-week">Mié</div>
+                <div class="day-of-week">Jue</div>
+                <div class="day-of-week">Vie</div>
+                <div class="day-of-week">Sáb</div>
+            </div>
+            <!-- Días numerados del 1 al 30 -->
+            <div class="day" data-day="1">1</div>
+            <div class="day" data-day="2">2</div>
+            <div class="day" data-day="3">3</div>
+            <div class="day" data-day="4">4</div>
+            <div class="day" data-day="5">5</div>
+            <div class="day" data-day="6">6</div>
+            <div class="day" data-day="7">7</div>
+            <div class="day" data-day="8">8</div>
+            <div class="day" data-day="9">9</div>
+            <div class="day" data-day="10">10</div>
+            <div class="day" data-day="11">11</div>
+            <div class="day" data-day="12">12</div>
+            <div class="day" data-day="13">13</div>
+            <div class="day" data-day="14">14</div>
+            <div class="day" data-day="15">15</div>
+            <div class="day" data-day="16">16</div>
+            <div class="day" data-day="17">17</div>
+            <div class="day" data-day="18">18</div>
+            <div class="day" data-day="19">19</div>
+            <div class="day" data-day="20">20</div>
+            <div class="day" data-day="21">21</div>
+            <div class="day" data-day="22">22</div>
+            <div class="day" data-day="23">23</div>
+            <div class="day" data-day="24">24</div>
+            <div class="day" data-day="25">25</div>
+            <div class="day" data-day="26">26</div>
+            <div class="day" data-day="27">27</div>
+            <div class="day" data-day="28">28</div>
+            <div class="day" data-day="29">29</div>
+            <div class="day" data-day="30">30</div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar notas -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>Agregar nota al día <span id="modal-day"></span></h2>
+            <input id="note-title" placeholder="Título de la nota" />
+            <input id="note-time" type="time" placeholder="Hora de la nota"/>
+            <textarea id="note-body" placeholder="Escribe el cuerpo de tu nota aquí"></textarea>
+            <button id="save-note-btn">Guardar nota</button>
+        </div>
+    </div>
+
+    <!-- Modal para visualizar notas -->
+    <div class="modal-note" id="note-modal">
+        <div class="note-content">
+            <h2>Notas del día <span id="note-day"></span></h2>
+            <ul id="notes-list"></ul>
+            <button id="add-more-note-btn">Agregar más notas</button>
+            <button id="close-note-btn" class="close-btn">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        const days = document.querySelectorAll('.day');
+        const modal = document.getElementById('modal');
+        const noteModal = document.getElementById('note-modal');
+        const modalDay = document.getElementById('modal-day');
+        const noteDay = document.getElementById('note-day');
+        const noteTitleInput = document.getElementById('note-title');
+        const noteTimeInput = document.getElementById('note-time');
+        const noteBodyInput = document.getElementById('note-body');
+        const saveNoteBtn = document.getElementById('save-note-btn');
+        const notesList = document.getElementById('notes-list');
+        const addMoreNoteBtn = document.getElementById('add-more-note-btn');
+        const closeNoteBtn = document.getElementById('close-note-btn');
+
+        let selectedDay = null;
+        let notes = {};
+
+        // Cargar notas desde localStorage
+        function loadNotes() {
+            const storedNotes = localStorage.getItem('notes');
+            if (storedNotes) {
+                notes = JSON.parse(storedNotes);
+                Object.keys(notes).forEach(dayNumber => {
+                    const dayElement = document.querySelector(`.day[data-day="${dayNumber}"]`);
+                    if (dayElement) {
+                        dayElement.classList.add('has-note');
+                    }
+                });
+            }
+        }
+
+        // Guardar notas en localStorage
+        function saveNotes() {
+            localStorage.setItem('notes', JSON.stringify(notes));
+        }
+
+        // Identificar el día actual
+        function highlightCurrentDay() {
+            const today = new Date();
+            const day = today.getDate();
+            const currentDayElement = document.querySelector(`.day[data-day="${day}"]`);
+
+            if (currentDayElement) {
+                currentDayElement.classList.add('current-day');
+            }
+        }
+
+        // Inicializar el calendario
+        function initCalendar() {
+            highlightCurrentDay();
+            loadNotes();
+
+            // Añadir eventos de clic a los días
+            days.forEach(day => {
+                day.addEventListener('click', () => {
+                    selectedDay = day;
+                    const dayNumber = day.getAttribute('data-day');
+
+                    if (notes[dayNumber]) {
+                        // Mostrar las notas en el modal de visualización
+                        noteDay.textContent = dayNumber;
+                        updateNotesList(dayNumber);
+                        noteModal.style.display = 'flex';
+                    } else {
+                        // Si no tiene nota, abrir el modal para agregar una
+                        modalDay.textContent = dayNumber;
+                        noteTitleInput.value = ''; // Vaciar el título
+                        noteTimeInput.value = ''; // Vaciar la hora
+                        noteBodyInput.value = ''; // Vaciar el cuerpo
+                        modal.style.display = 'flex';
+                    }
+                });
+            });
+
+            // Guardar una nueva nota
+            saveNoteBtn.addEventListener('click', () => {
+                const title = noteTitleInput.value;
+                const time = noteTimeInput.value;
+                const body = noteBodyInput.value;
+                const dayNumber = selectedDay.getAttribute('data-day');
+
+                if (title && body) {
+                    if (!notes[dayNumber]) {
+                        notes[dayNumber] = [];
+                    }
+
+                    notes[dayNumber].push({ title, time, body });
+                    selectedDay.classList.add('has-note'); // Cambia el color del día
+                    modal.style.display = 'none';
+                    noteTitleInput.value = ''; // Vaciar los inputs después de guardar
+                    noteTimeInput.value = ''; // Vaciar los inputs después de guardar
+                    noteBodyInput.value = ''; // Vaciar los inputs después de guardar
+                    saveNotes(); // Guardar en localStorage
+                }
+            });
+
+            // Actualizar la lista de notas en el modal de visualización
+            function updateNotesList(dayNumber) {
+                notesList.innerHTML = '';
+                notes[dayNumber].forEach((note, index) => {
+                    const noteItem = document.createElement('li');
+                    noteItem.innerHTML = `
+                        <span><strong>${note.title}</strong><br>${note.time ? `[${note.time}] ` : ''}${note.body}</span>
+                        <button onclick="deleteNote(${dayNumber}, ${index})">Eliminar</button>
+                    `;
+                    notesList.appendChild(noteItem);
+                });
+            }
+
+            // Eliminar una nota específica
+            window.deleteNote = function(dayNumber, index) {
+                notes[dayNumber].splice(index, 1);
+                if (notes[dayNumber].length === 0) {
+                    delete notes[dayNumber];
+                    const dayElement = document.querySelector(`.day[data-day="${dayNumber}"]`);
+                    dayElement.classList.remove('has-note'); // Restablecer el color del día
+                    noteModal.style.display = 'none';
+                } else {
+                    updateNotesList(dayNumber);
+                }
+                saveNotes(); // Guardar en localStorage
+            }
+
+            // Cerrar el modal de visualización de nota
+            closeNoteBtn.addEventListener('click', () => {
+                noteModal.style.display = 'none';
+            });
+
+            // Abrir modal para agregar más notas
+            addMoreNoteBtn.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                noteModal.style.display = 'none';
+            });
+
+            // Cerrar el modal de agregar nota si se hace clic fuera del contenido
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                } else if (event.target === noteModal) {
+                    noteModal.style.display = 'none';
+                }
+            });
+        }
+
+        // Inicializar el calendario
+        initCalendar();
+    </script>
+</body>
+</html>
